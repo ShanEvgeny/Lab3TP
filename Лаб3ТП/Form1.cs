@@ -28,7 +28,6 @@ namespace Лаб3ТП
             {
                 textBox2.Text = Logic.DeleteNumberToSet(number, isChecked, set);
             }
-            //textBox2.Text = String.Join(" ", set);
             textBox1.Text = "";
         }
 
@@ -45,7 +44,6 @@ namespace Лаб3ТП
             {
                 textBox4.Text = Logic.DeleteNumberToSet(number, isChecked, set);
             }
-            //textBox4.Text = String.Join(" ", set);
             textBox3.Text = "";
         }
 
@@ -55,6 +53,44 @@ namespace Лаб3ТП
             var set2 = Logic.GetSet2();
             textBox5.Text = Logic.UniteTwoSets(set1, set2);
 
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            var set1 = Logic.GetSet1();
+            var set2 = Logic.GetSet2();
+            textBox5.Text = Logic.IntersectTwoSets(set1, set2);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var set1 = Logic.GetSet1();
+            var set2 = Logic.GetSet2();
+            textBox5.Text = Logic.SubtractSecondSetFromFirstSet(set1, set2);
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            var set1 = Logic.GetSet1();
+            var set2 = Logic.GetSet2();
+            textBox5.Text = Logic.SubtractFirstSetFromSecondSet(set1, set2);
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!checkBox1.Checked)
+            {
+                checkBox1.Text = "удаление";
+            }
+            else
+            {
+                checkBox1.Text = "добавление";
+            }
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            checkBox1_CheckedChanged(this, new EventArgs());
         }
     }
     public class Logic
@@ -77,6 +113,47 @@ namespace Лаб3ТП
             }
             results = String.Join(" ", resultSet);
             return results;//zdes bil nikita
+        }
+        public static string IntersectTwoSets(HashSet<int> set1, HashSet<int> set2)
+        {
+            List<int> resultSet = new List<int>();
+            string results;
+            foreach (int number in set1)
+            {
+                if (set1.Contains(number) && set2.Contains(number) && !resultSet.Contains(number))
+                    resultSet.Add(number);
+            }
+            foreach (int number in set2)
+            {
+                if (set2.Contains(number) && set1.Contains(number) && !resultSet.Contains(number))
+                    resultSet.Add(number);
+            }
+            results = String.Join(" ", resultSet);
+            return results;
+        }
+        public static string SubtractFirstSetFromSecondSet(HashSet<int> set1, HashSet<int> set2)
+        {
+            List<int> resultSet = new List<int>();
+            string results;
+            foreach (int number in set2)
+            {
+                if (!set1.Contains(number) && set2.Contains(number))
+                    resultSet.Add(number);
+            }
+            results = String.Join(" ", resultSet);
+            return results;
+        }
+        public static string SubtractSecondSetFromFirstSet(HashSet<int> set1, HashSet<int> set2)
+        {
+            List<int> resultSet = new List<int>();
+            string results;
+            foreach (int number in set1)
+            {
+                if (set1.Contains(number) && !set2.Contains(number))
+                    resultSet.Add(number);
+            }
+            results = String.Join(" ", resultSet);
+            return results;
         }
         public static string AddNumberToSet(int number, bool isChecked, HashSet<int> set)
         {
