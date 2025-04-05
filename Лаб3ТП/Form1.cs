@@ -14,17 +14,21 @@ namespace Лаб3ТП
         {
             int number;
             HashSet<int> set;
+            bool isChecked;
             try
             {
                 number = Convert.ToInt32(textBox1.Text);
                 set = Logic.GetSet1();
+                isChecked = checkBox1.Checked;
+                if (set.Contains(number) && isChecked || !set.Contains(number) && !isChecked)
+                    throw new FormatException();
             }
-            catch (FormatException ex)
+            catch (FormatException)
             {
                 MessageBox.Show("Некорректный ввод", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            var isChecked = checkBox1.Checked;
+            
             if (isChecked)
             {
                 textBox2.Text = Logic.AddNumberToSet(number, isChecked, set);
@@ -35,22 +39,24 @@ namespace Лаб3ТП
             }
             textBox1.Text = "";
         }
-
         private void button5_Click(object sender, EventArgs e)
         {
             int number;
             HashSet<int> set;
+            bool isChecked;
             try
             {
                 number = Convert.ToInt32(textBox3.Text);
                 set = Logic.GetSet2();
+                isChecked = checkBox2.Checked;
+                if (set.Contains(number) && isChecked || !set.Contains(number) && !isChecked)
+                    throw new FormatException();
             }
-            catch (FormatException ex)
+            catch (FormatException)
             {
                 MessageBox.Show("Некорректный ввод", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            var isChecked = checkBox2.Checked;
             if (isChecked)
             {
                 textBox4.Text = Logic.AddNumberToSet(number, isChecked, set);
@@ -127,6 +133,8 @@ namespace Лаб3ТП
                     resultSet.Add(number);
             }
             results = String.Join(" ", resultSet);
+            if (results == "")
+                return "пустое множество";
             return results;//zdes bil nikita
         }
         public static string IntersectTwoSets(HashSet<int> set1, HashSet<int> set2)
@@ -144,6 +152,8 @@ namespace Лаб3ТП
                     resultSet.Add(number);
             }
             results = String.Join(" ", resultSet);
+            if (results == "")
+                return "пустое множество";
             return results;
         }
         public static string SubtractFirstSetFromSecondSet(HashSet<int> set1, HashSet<int> set2)
@@ -156,6 +166,8 @@ namespace Лаб3ТП
                     resultSet.Add(number);
             }
             results = String.Join(" ", resultSet);
+            if (results == "")
+                return "пустое множество";
             return results;
         }
         public static string SubtractSecondSetFromFirstSet(HashSet<int> set1, HashSet<int> set2)
@@ -168,10 +180,14 @@ namespace Лаб3ТП
                     resultSet.Add(number);
             }
             results = String.Join(" ", resultSet);
+            if (results == "")
+                return "пустое множество";
             return results;
         }
         public static string AddNumberToSet(int number, bool isChecked, HashSet<int> set)
         {
+            if (set == null) 
+                set = new HashSet<int>();
             set.Add(number);
             return String.Join(" ", set);
         }
