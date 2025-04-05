@@ -10,16 +10,21 @@ namespace Лаб3ТП
             InitializeComponent();
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void button4_Click(object sender, EventArgs e)
         {
-            var number = Convert.ToInt32(textBox1.Text);
+            int number;
+            HashSet<int> set;
+            try
+            {
+                number = Convert.ToInt32(textBox1.Text);
+                set = Logic.GetSet1();
+            }
+            catch (FormatException ex)
+            {
+                MessageBox.Show("Некорректный ввод", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             var isChecked = checkBox1.Checked;
-            var set = Logic.GetSet1();
             if (isChecked)
             {
                 textBox2.Text = Logic.AddNumberToSet(number, isChecked, set);
@@ -33,9 +38,19 @@ namespace Лаб3ТП
 
         private void button5_Click(object sender, EventArgs e)
         {
-            var number = Convert.ToInt32(textBox3.Text);
+            int number;
+            HashSet<int> set;
+            try
+            {
+                number = Convert.ToInt32(textBox3.Text);
+                set = Logic.GetSet2();
+            }
+            catch (FormatException ex)
+            {
+                MessageBox.Show("Некорректный ввод", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             var isChecked = checkBox2.Checked;
-            var set = Logic.GetSet2();
             if (isChecked)
             {
                 textBox4.Text = Logic.AddNumberToSet(number, isChecked, set);
