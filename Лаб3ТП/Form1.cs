@@ -13,7 +13,7 @@ namespace Лаб3ТП
         private void button4_Click(object sender, EventArgs e)
         {
             int number;
-            HashSet<int> set;
+            List<int> set;
             bool isChecked;
             try
             {
@@ -25,6 +25,7 @@ namespace Лаб3ТП
             }
             catch (FormatException)
             {
+                textBox1.Text = "";
                 MessageBox.Show("Некорректный ввод", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
@@ -42,7 +43,7 @@ namespace Лаб3ТП
         private void button5_Click(object sender, EventArgs e)
         {
             int number;
-            HashSet<int> set;
+            List<int> set;
             bool isChecked;
             try
             {
@@ -54,6 +55,7 @@ namespace Лаб3ТП
             }
             catch (FormatException)
             {
+                textBox3.Text = "";
                 MessageBox.Show("Некорректный ввод", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
@@ -116,9 +118,9 @@ namespace Лаб3ТП
     }
     public class Logic
     {
-        private static HashSet<int> set1 = new HashSet<int>();
-        private static HashSet<int> set2 = new HashSet<int>();
-        public static string UniteTwoSets(HashSet<int> set1, HashSet<int> set2)
+        private static List<int> set1 = new List<int>();
+        private static List<int> set2 = new List<int>();
+        public static string UniteTwoSets(List<int> set1, List<int> set2)
         {
             List<int> resultSet = new List<int>();
             string results;
@@ -137,7 +139,7 @@ namespace Лаб3ТП
                 return "пустое множество";
             return results;//zdes bil nikita
         }
-        public static string IntersectTwoSets(HashSet<int> set1, HashSet<int> set2)
+        public static string IntersectTwoSets(List<int> set1, List<int> set2)
         {
             List<int> resultSet = new List<int>();
             string results;
@@ -156,7 +158,7 @@ namespace Лаб3ТП
                 return "пустое множество";
             return results;
         }
-        public static string SubtractFirstSetFromSecondSet(HashSet<int> set1, HashSet<int> set2)
+        public static string SubtractFirstSetFromSecondSet(List<int> set1, List<int> set2)
         {
             List<int> resultSet = new List<int>();
             string results;
@@ -170,7 +172,7 @@ namespace Лаб3ТП
                 return "пустое множество";
             return results;
         }
-        public static string SubtractSecondSetFromFirstSet(HashSet<int> set1, HashSet<int> set2)
+        public static string SubtractSecondSetFromFirstSet(List<int> set1, List<int> set2)
         {
             List<int> resultSet = new List<int>();
             string results;
@@ -184,23 +186,21 @@ namespace Лаб3ТП
                 return "пустое множество";
             return results;
         }
-        public static string AddNumberToSet(int number, bool isChecked, HashSet<int> set)
+        public static string AddNumberToSet(int number, bool isChecked, List<int> set)
         {
-            if (set == null) 
-                set = new HashSet<int>();
             set.Add(number);
             return String.Join(" ", set);
         }
-        public static string DeleteNumberToSet(int number, bool isChecked, HashSet<int> set)
+        public static string DeleteNumberToSet(int number, bool isChecked, List<int> set)
         {
             set.Remove(number);
             return String.Join(" ", set);
         }
-        public static HashSet<int> GetSet1()
+        public static List<int> GetSet1()
         {
             return set1;
         }
-        public static HashSet<int> GetSet2()
+        public static List<int> GetSet2()
         {
             return set2;
         }
